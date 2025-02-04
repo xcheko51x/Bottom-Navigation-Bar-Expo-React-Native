@@ -1,20 +1,103 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react'
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Ionicons } from '@expo/vector-icons'
+
+function HomeScreen() {
+  return(
+    <SafeAreaView style={ styles.container }>
+      <View style={ styles.centeredView }>
+        <Text style={ styles.text }> Home Screen </Text>
+      </View>
+    </SafeAreaView>
+  )
+}
+
+function SettingsScreen() {
+  return(
+    <SafeAreaView style={ styles.container }>
+      <View style={ styles.centeredView }>
+        <Text style={ styles.text }> Settings Screen </Text>
+      </View>
+    </SafeAreaView>
+  )
+}
+
+function ProfileScreen() {
+  return(
+    <SafeAreaView style={ styles.container }>
+      <View style={ styles.centeredView }>
+        <Text style={ styles.text }> Profile Screen </Text>
+      </View>
+    </SafeAreaView>
+  )
+}
+
+const Tab = createBottomTabNavigator()
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return(
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name='Home'
+          component={ HomeScreen }
+          options={
+            { tabBarIcon: () => 
+              <Ionicons
+                name='home'
+                size={24}
+                color={"black"}
+              />
+            }
+          }
+        />
+
+        <Tab.Screen
+          name='Settings'
+          component={ SettingsScreen }
+          options={
+            { tabBarIcon: () => 
+              <Ionicons
+                name='settings'
+                size={24}
+                color={"black"}
+              />
+            }
+          }
+        />
+
+        <Tab.Screen
+          name='Profile'
+          component={ ProfileScreen }
+          options={
+            { tabBarIcon: () => 
+              <Ionicons
+                name='person'
+                size={24}
+                color={"black"}
+              />
+            }
+          }
+        />
+
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1
   },
-});
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+})
